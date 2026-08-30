@@ -1,0 +1,33 @@
+<div>
+
+    <label class="flex items-start gap-3 cursor-pointer">
+
+        <input
+            type="hidden"
+            name="{{ name }}"
+            value="0">
+
+        <input
+            type="checkbox"
+            name="{{ name }}"
+            value="1"
+            class="mt-1"
+            {{ value ? 'checked' : '' }}>
+
+        <div>
+
+            <div class="text-sm font-medium text-gray-700">
+                {{ label }}
+            </div>
+
+            {% if hint %}
+                <p class="text-xs text-gray-400 mt-1">
+                    {{ hint }}
+                </p>
+            {% endif %}
+
+        </div>
+
+    </label>
+
+</div>

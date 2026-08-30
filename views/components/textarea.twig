@@ -1,0 +1,19 @@
+<div>
+
+    {% if label %}
+        <label class="block text-sm font-medium text-gray-700 mb-1">
+            {{ label }}
+        </label>
+    {% endif %}
+
+    <textarea
+        name="{{ name }}"
+        class="w-full border rounded-lg px-3 py-2 {{ class|default('') }}">{{ value|default('') }}</textarea>
+
+    {% if hint %}
+        <p class="text-xs text-gray-400 mt-1">
+            {{ hint }}
+        </p>
+    {% endif %}
+
+</div>

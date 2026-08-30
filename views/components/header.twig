@@ -1,0 +1,98 @@
+<header class="sticky top-0 z-40 backdrop-blur bg-white/90 shadow px-4 py-3 flex justify-between items-center">
+
+    {# LEFT #}
+    <div class="flex items-center space-x-3">
+        <button @click="sidebarOpen = true"
+                class="md:hidden text-gray-700 text-xl">
+            ☰
+        </button>
+
+        <h1 class="font-semibold text-lg">
+            {{ page.title ?? 'Dashboard' }}
+        </h1>
+    </div>
+
+    {# RIGHT #}
+    <div class="flex items-center space-x-3">
+
+        {# 🔌 ACTION BUTTONS #}
+        {% set actions = hook('admin.header.right', []) %}
+        {% if actions is not iterable %}
+            {% set actions = [] %}
+        {% endif %}
+
+        {% for item in actions %}
+            {% set type = item.type|default('link') %}
+
+            {% if type == 'link' %}
+                <a href="{{ item.url|default('#') }}"
+                   class="flex items-center gap-2 text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded">
+
+                    {% if item.icon %}
+                        {{ icon(item.icon, 'w-4 h-4')|raw }}
+                    {% endif %}
+
+                    <span class="hidden sm:inline">
+                        {{ item.title|default('Item') }}
+                    </span>
+                </a>
+            {% endif %}
+        {% endfor %}
+
+        {# 👤 USER MENU #}
+        <div class="relative" x-data="{ open: false }">
+
+		<button @click="open = !open"
+			class="flex items-center gap-2 px-3 py-1.5 rounded-lg 
+			       bg-white border border-gray-200 shadow-sm
+			       hover:bg-gray-50 hover:shadow
+			       transition-all duration-150">
+
+		    <div class="w-7 h-7 flex items-center justify-center rounded-full bg-gray-200">
+			{{ icon('user', 'w-4 h-4 text-gray-700')|raw }}
+		    </div>
+
+		    <svg class="w-4 h-4 text-gray-400 transition-transform duration-150"
+			 :class="open ? 'rotate-180' : ''"
+			 fill="none" stroke="currentColor" viewBox="0 0 24 24">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+			      d="M19 9l-7 7-7-7" />
+		    </svg>
+		</button>
+
+            <div x-show="open"
+                 @click.outside="open = false"
+                 class="absolute right-0 mt-2 w-56 bg-white border rounded shadow z-50">
+
+                {% set userMenu = hook('admin.header.user', []) %}
+                {% if userMenu is not iterable %}
+                    {% set userMenu = [] %}
+                {% endif %}
+
+                {% for item in userMenu %}
+                    <a href="{{ item.url|default('#') }}"
+                       class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-gray-100">
+
+                        {% if item.icon %}
+                            {{ icon(item.icon, 'w-4 h-4')|raw }}
+                        {% endif %}
+
+                        {{ item.title|default('Item') }}
+                    </a>
+                {% endfor %}
+
+                <div class="border-t my-1"></div>
+
+                <a href="{{ route('admin.logout') }}"
+                   class="flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-gray-100">
+
+                    {{ icon('logout', 'w-4 h-4')|raw }}
+                    Logout
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+
+</header>

@@ -1,0 +1,221 @@
+<div
+    class="space-y-4"
+    data-schema-repeater
+    data-label="{{ field.label }}"
+>
+
+    {# ---------------------------------------------------------
+       REPEATER HEADER
+       --------------------------------------------------------- #}
+
+    <div class="flex items-center justify-between gap-4">
+
+        <div>
+
+            <label class="block text-sm font-medium">
+                {{ field.label }}
+            </label>
+
+            {% if field.hint %}
+                <p class="mt-1 text-sm opacity-60">
+                    {{ field.hint }}
+                </p>
+            {% endif %}
+
+        </div>
+
+	<button
+	    type="button"
+	    data-repeater-add
+	    class="inline-flex items-center gap-2 rounded-full px-4 py-2
+		   text-sm font-medium
+		   bg-blue-600 text-white
+		   shadow-sm
+		   transition-all duration-200
+		   hover:bg-blue-700 hover:shadow-md
+		   active:scale-95"
+	>
+	    {{ icon('plus', 'w-4 h-4')|raw }}
+	    <span>{{ field.add_label|default('Add item') }}</span>
+	</button>
+
+    </div>
+
+
+    {# ---------------------------------------------------------
+       ITEMS
+       --------------------------------------------------------- #}
+
+    <div
+        class="space-y-3"
+        data-repeater-items
+    >
+
+        {% for item in value %}
+
+            {% set itemIndex = loop.index0 %}
+
+		<details
+		    class="schema-repeater-item"
+		    data-repeater-item
+		>
+
+		    <summary class="schema-repeater-header">
+
+			<div class="flex items-center gap-3 min-w-0">
+
+			    <span class="schema-repeater-number">
+				{{ loop.index }}
+			    </span>
+
+			    <div class="min-w-0">
+				<div class="font-medium truncate">
+				    {{ field.label }} {{ loop.index }}
+				</div>
+			    </div>
+
+			</div>
+
+			<span class="schema-repeater-toggle">
+			    {{ icon('arrow-down', 'w-4 h-4')|raw }}
+			</span>
+
+		    </summary>
+
+
+		    <div class="schema-repeater-content">
+
+			<div class="space-y-4">
+
+			    {% for childKey, child in field.fields %}
+
+				{% set childName =
+				    inputName
+				    ~ '[' ~ itemIndex ~ ']'
+				    ~ '[' ~ childKey ~ ']'
+				%}
+
+				{% set childValue =
+				    item[childKey] ?? child.default ?? ''
+				%}
+
+				{% include "@Admin/components/schema-form-fields.twig" with {
+				    inputName: childName,
+				    value: childValue,
+				    field: child
+				} %}
+
+			    {% endfor %}
+
+			</div>
+
+			<div class="flex justify-end mt-4">
+
+			    <button
+				type="button"
+				data-repeater-remove
+				class="inline-flex items-center gap-2 rounded-full px-4 py-2
+				       text-sm font-medium
+				       bg-red-600 text-white
+				       shadow-sm
+				       transition-all duration-200
+				       hover:bg-red-700 hover:shadow-md
+				       active:scale-95"
+			    >
+				{{ icon('trash', 'w-4 h-4')|raw }}
+				<span>Remove</span>
+			    </button>
+
+			</div>
+
+
+		    </div>
+
+		</details>
+
+        {% endfor %}
+
+    </div>
+
+
+    {# ---------------------------------------------------------
+       TEMPLATE FOR NEW ITEMS
+       --------------------------------------------------------- #}
+
+	<template data-repeater-template>
+
+	    <details
+		class="schema-repeater-item"
+		data-repeater-item
+		open
+	    >
+
+		<summary class="schema-repeater-header">
+
+		    <div class="flex items-center gap-3 min-w-0">
+
+		        <span class="schema-repeater-number">
+		            1
+		        </span>
+
+		        <div class="font-medium truncate">
+		            {{ field.label }}
+		        </div>
+
+		    </div>
+
+		    <span class="schema-repeater-toggle">
+		        {{ icon('arrow-down', 'w-4 h-4')|raw }}
+		    </span>
+
+		</summary>
+
+
+		<div class="schema-repeater-content">
+
+		    <div class="flex justify-end mb-4">
+
+		        <button
+		            type="button"
+		            class="schema-repeater-remove inline-flex items-center gap-2
+		                   rounded-full px-3 py-2
+		                   text-sm font-medium
+		                   text-red-600
+		                   hover:bg-red-50
+		                   transition"
+		            data-repeater-remove
+		        >
+		            {{ icon('trash-2', 'w-4 h-4')|raw }}
+		            <span>Remove</span>
+		        </button>
+
+		    </div>
+
+
+		    <div class="space-y-4">
+
+		        {% for childKey, child in field.fields %}
+
+		            {% set childName =
+		                inputName
+		                ~ '[__INDEX__]'
+		                ~ '[' ~ childKey ~ ']'
+		            %}
+
+		            {% include "@Admin/components/schema-form-fields.twig" with {
+		                inputName: childName,
+		                value: child.default ?? '',
+		                field: child
+		            } %}
+
+		        {% endfor %}
+
+		    </div>
+
+		</div>
+
+	    </details>
+
+	</template>
+
+</div>

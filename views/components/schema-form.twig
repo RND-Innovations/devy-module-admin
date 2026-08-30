@@ -1,0 +1,95 @@
+<div class="space-y-4">
+
+    {% for sectionKey, section in schema %}
+
+        <details
+            class="schema-section border rounded-lg bg-white"
+        >
+
+	<summary class="cursor-pointer list-none p-5">
+
+	    <div class="flex items-center justify-between gap-4">
+
+		<div class="min-w-0">
+
+		    <div class="flex items-center gap-2 font-semibold">
+
+		        {{ icon(section.icon|default('square-menu'), 'w-5 h-5 shrink-0')|raw }}
+
+		        <span>
+		            {{ section.label }}
+		        </span>
+
+		    </div>
+
+		    {% if section.info %}
+		        <div class="text-sm opacity-60 mt-1">
+		            {{ section.info }}
+		        </div>
+		    {% endif %}
+
+		</div>
+
+		<span class="schema-section-toggle shrink-0">
+		    {{ icon('arrow-down', 'w-4 h-4')|raw }}
+		</span>
+
+	    </div>
+
+	</summary>
+
+
+            <div class="border-t p-5">
+
+                <div class="space-y-4">
+
+                    {% for fieldKey, field in section.fields %}
+
+                        {% set inputName =
+                            root ~ '[' ~ sectionKey ~ '][' ~ fieldKey ~ ']'
+                        %}
+
+                        {% set value =
+                            field.value ?? field.default ?? ''
+                        %}
+
+
+                        {% if field.type == 'notice' %}
+
+                            {% include "@Admin/components/schema-form-notice.twig" with {
+                                field: field
+                            } %}
+
+
+                        {% elseif field.type == 'separator' %}
+
+                            {% include "@Admin/components/schema-form-header.twig" with {
+                                field: field
+                            } %}
+
+
+                        {% else %}
+
+                            <div class="ml-4">
+
+                                {% include "@Admin/components/schema-form-fields.twig" with {
+                                    inputName: inputName,
+                                    value: value,
+                                    field: field
+                                } %}
+
+                            </div>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </details>
+
+    {% endfor %}
+
+</div>

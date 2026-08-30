@@ -1,0 +1,32 @@
+<div class="mt-8 first:mt-0 rounded-xl border border-gray-200 bg-gray-300 px-5 py-4">
+
+	<div class="flex items-center gap-3">
+
+	    <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600">
+
+		{% if field.icon %}
+		    {{ icon(field.icon, 'w-5 h-5')|raw }}
+		{% else %}
+		    {{ icon('folder', 'w-5 h-5')|raw }}
+		{% endif %}
+
+	    </div>
+
+	    <div class="flex-1">
+
+		<h3 class="text-lg font-semibold text-gray-900">
+		    {{ field.label }}
+		</h3>
+
+		{% if field.text %}
+		    <p class="mt-1 text-sm text-gray-600">
+			{{ field.text }}
+		    </p>
+		{% endif %}
+
+	    </div>
+
+	</div>
+
+</div>
+

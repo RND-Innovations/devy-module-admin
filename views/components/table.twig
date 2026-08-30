@@ -1,0 +1,21 @@
+<div class="overflow-x-auto">
+    <table class="w-full text-left border min-w-max">
+        <thead class="bg-gray-100">
+            <tr>
+                {% for col in columns %}
+                    <th class="p-2 whitespace-nowrap">{{ col }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for row in rows %}
+                <tr class="border-t">
+                    {% for cell in row %}
+                        <td class="p-2 whitespace-nowrap">{{ cell }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

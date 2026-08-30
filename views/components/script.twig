@@ -1,0 +1,12 @@
+<script>
+    function csrf() {
+        return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    }
+</script>
+
+{{ assets_js() }}
+
+{{ hook_render('admin.global.script', {
+    page: page,
+    routes: routes
+}) }}

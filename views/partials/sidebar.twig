@@ -1,0 +1,86 @@
+<div class="space-y-6">
+
+    {% set quickLinks = hook('admin.dashboard.links', []) %}
+    {% if quickLinks is not iterable %}
+        {% set quickLinks = [] %}
+    {% endif %}
+
+    {% if quickLinks is not empty %}
+
+        <div class="rounded-3xl border border-zinc-200 bg-white shadow-lg overflow-hidden">
+
+            <div class="px-5 py-4 border-b border-zinc-100">
+
+                <h3 class="font-black text-zinc-900">
+                    Quick Links
+                </h3>
+
+                <p class="text-sm text-zinc-500 mt-1">
+                    Tools and shortcuts
+                </p>
+
+            </div>
+
+            <div class="divide-y divide-zinc-100">
+
+                {% for item in quickLinks %}
+
+                    <a href="{{ item.url|default('#') }}"
+                       class="group flex items-center gap-4 px-5 py-4 hover:bg-zinc-50 transition">
+
+                        {% if item.icon %}
+
+                            <div class="w-11 h-11 rounded-2xl bg-zinc-100 flex items-center justify-center text-zinc-700 group-hover:bg-blue-600 group-hover:text-white transition">
+
+                                {{ icon(item.icon, 'w-5 h-5')|raw }}
+
+                            </div>
+
+                        {% endif %}
+
+                        <div class="flex-1">
+
+                            <div class="font-semibold text-zinc-900">
+
+                                {{ item.title }}
+
+                            </div>
+
+                            {% if item.description %}
+
+                                <div class="text-sm text-zinc-500 mt-1">
+
+                                    {{ item.description }}
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+                        <div class="text-zinc-400 group-hover:text-blue-600 transition">
+
+                            {{ icon('go','w-5 h-5')|raw }}
+
+                        </div>
+
+                    </a>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    {% endif %}
+
+    {% set sidebar = hook('admin.dashboard.sidebar', []) %}
+    {% if sidebar is not iterable %}
+        {% set sidebar = [] %}
+    {% endif %}
+
+    {% for block in sidebar %}
+        {{ block|raw }}
+    {% endfor %}
+
+</div>

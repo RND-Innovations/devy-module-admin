@@ -1,0 +1,35 @@
+<div class="xl:col-span-2 space-y-6">
+
+	{% set main = hook('admin.dashboard.main', []) %}
+	{% if main is not iterable %}
+	    {% set main = [] %}
+	{% endif %}
+
+	{% if main is empty %}
+
+	    <div class="relative overflow-hidden rounded-3xl border border-zinc-200 bg-[#fafafa] shadow-xl p-8">
+
+		<div class="absolute -top-16 -right-16 w-56 h-56 bg-blue-100 rounded-full blur-3xl opacity-60"></div>
+
+		<div class="relative">
+
+		    <h2 class="text-2xl font-black tracking-tight text-zinc-900 mb-3">
+		        Welcome to your dashboard
+		    </h2>
+
+		    <p class="text-zinc-600 leading-relaxed max-w-2xl">
+		        Manage your content, media, navigation, themes, and modules from a centralized admin experience.
+		    </p>
+
+		</div>
+
+	    </div>
+
+	{% endif %}
+
+	{% for block in main %}
+	    {{ block|raw }}
+	{% endfor %}
+
+</div>
+

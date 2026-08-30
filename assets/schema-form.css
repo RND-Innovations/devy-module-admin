@@ -1,0 +1,226 @@
+.schema-section > summary::-webkit-details-marker {
+    display: none;
+}
+
+.schema-section-toggle {
+    width: 2.25rem;
+    height: 2.25rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 2.25rem;
+
+    border: 1px solid currentColor;
+    border-radius: 50%;
+
+    background: color-mix(
+        in srgb,
+        currentColor 8%,
+        transparent
+    );
+
+    color: inherit;
+
+    opacity: .7;
+
+    transition: all .2s ease;
+}
+
+.schema-section-toggle:hover {
+    background: color-mix(
+        in srgb,
+        currentColor 15%,
+        transparent
+    );
+
+    opacity: 1;
+}
+
+.schema-section[open] .schema-section-toggle {
+    transform: rotate(180deg);
+}
+
+
+.schema-repeater-item {
+    border: 1px solid color-mix(
+        in srgb,
+        currentColor 12%,
+        transparent
+    );
+
+    border-radius: .75rem;
+
+    overflow: hidden;
+
+    background: color-mix(
+        in srgb,
+        currentColor 2%,
+        transparent
+    );
+}
+
+.schema-repeater-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+
+    padding: .85rem 1rem;
+
+    cursor: pointer;
+    user-select: none;
+
+    list-style: none;
+}
+
+.schema-repeater-header::-webkit-details-marker {
+    display: none;
+}
+
+.schema-repeater-header::marker {
+    display: none;
+}
+
+
+/* ---------------------------------------------------------
+   Number
+   --------------------------------------------------------- */
+
+.schema-repeater-number {
+    width: 2rem;
+    height: 2rem;
+
+    flex: 0 0 2rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: color-mix(
+        in srgb,
+        currentColor 8%,
+        transparent
+    );
+
+    font-size: .8rem;
+    font-weight: 600;
+
+    opacity: .75;
+}
+
+
+/* ---------------------------------------------------------
+   Expand button
+   --------------------------------------------------------- */
+
+.schema-repeater-toggle {
+    width: 2rem;
+    height: 2rem;
+
+    flex: 0 0 2rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid currentColor;
+    border-radius: 50%;
+
+    background: color-mix(
+        in srgb,
+        currentColor 6%,
+        transparent
+    );
+
+    opacity: .55;
+
+    transition:
+        transform .2s ease,
+        opacity .2s ease,
+        background-color .2s ease;
+}
+
+.schema-repeater-header:hover .schema-repeater-toggle {
+    opacity: .9;
+
+    background: color-mix(
+        in srgb,
+        currentColor 12%,
+        transparent
+    );
+}
+
+.schema-repeater-item[open] .schema-repeater-toggle {
+    transform: rotate(180deg);
+    opacity: .8;
+}
+
+
+/* ---------------------------------------------------------
+   Content
+   --------------------------------------------------------- */
+
+.schema-repeater-content {
+    padding: 1rem;
+
+    border-top: 1px solid color-mix(
+        in srgb,
+        currentColor 10%,
+        transparent
+    );
+}
+
+
+/* ---------------------------------------------------------
+   Remove button
+   --------------------------------------------------------- */
+
+.schema-repeater-remove {
+    width: 2rem;
+    height: 2rem;
+
+    flex: 0 0 2rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid color-mix(
+        in srgb,
+        currentColor 12%,
+        transparent
+    );
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: inherit;
+
+    opacity: .45;
+
+    cursor: pointer;
+
+    transition:
+        opacity .2s ease,
+        background-color .2s ease,
+        transform .15s ease;
+}
+
+.schema-repeater-remove:hover {
+    opacity: 1;
+
+    background: color-mix(
+        in srgb,
+        currentColor 10%,
+        transparent
+    );
+}
+
+.schema-repeater-remove:active {
+    transform: scale(.9);
+}

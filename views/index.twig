@@ -1,0 +1,33 @@
+{% extends "@Admin/layouts/admin.twig" %}
+
+{% set _page = 'admin.dashboard' %}
+
+{% block content %}
+
+	{# -------------------------------
+	   📊 TOP STATS GRID
+	-------------------------------- #}
+	{% include '@Admin/partials/top.twig' %}
+
+
+	{# -------------------------------
+	   🧱 MAIN CONTENT AREA
+	-------------------------------- #}
+
+	<div class="mt-6 grid grid-cols-1 xl:grid-cols-3 gap-6">
+
+	    {# LEFT #}
+	    {% include '@Admin/partials/left.twig' %}
+
+	    {# RIGHT SIDEBAR #}
+	    {% include '@Admin/partials/sidebar.twig' %}
+
+	</div>
+
+
+	{# -------------------------------
+	   🧩 BOTTOM AREA
+	-------------------------------- #}
+	{% include '@Admin/partials/bottom.twig' %}
+
+{% endblock %}

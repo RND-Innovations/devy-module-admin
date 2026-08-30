@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include "@Admin/components/head.twig" %}
+    
+	<style>
+	[x-cloak] { display: none !important; }
+	</style>
+
+</head>
+
+<body x-data="{ sidebarOpen: false }" class="bg-gray-100 h-screen flex overflow-hidden" x-cloak>
+
+    {% include "@Admin/components/sidebar.twig" %}
+
+    <div class="flex-1 flex flex-col overflow-hidden">
+
+        {% include "@Admin/components/header.twig" %}
+
+        <main class="flex-1 overflow-y-auto p-4 md:p-6">
+            {% block content %}{% endblock %}
+        </main>
+
+    </div>
+    {% include "@Admin/components/toast.twig" %}
+    {% include "@Admin/components/script.twig" %}
+</body>
+</html>

@@ -1,0 +1,164 @@
+{#
+--------------------------------------------
+Text
+--------------------------------------------
+#}
+
+{% if field.type == 'text' %}
+
+    {% include "@Admin/components/input.twig" with {
+        label: field.label,
+        name: inputName,
+        value: value,
+        hint: field.hint ?? ''
+    } %}
+
+{% endif %}
+
+{#
+--------------------------------------------
+Number
+--------------------------------------------
+#}
+
+{% if field.type == 'number' %}
+
+    {% include "@Admin/components/input.twig" with {
+        type: 'number',
+        label: field.label,
+        name: inputName,
+        value: value,
+        hint: field.hint ?? ''
+    } %}
+
+{% endif %}
+
+{#
+--------------------------------------------
+Password
+--------------------------------------------
+#}
+
+{% if field.type == 'password' %}
+
+    {% include "@Admin/components/password.twig" with {
+	label: field.label,
+	name: inputName,
+	value: value,
+	write_only: field.write_only ?? false,
+	hint: field.hint ?? ''
+    } %}
+
+{% endif %}
+
+{#
+--------------------------------------------
+Color
+--------------------------------------------
+#}
+
+{% if field.type == 'color' %}
+
+    {% include "@Admin/components/input.twig" with {
+	type: 'color',
+	label: field.label,
+	name: inputName,
+	value: value,
+	hint: field.hint ?? ''
+    } %}
+
+{% endif %}
+
+{#
+--------------------------------------------
+Textarea
+--------------------------------------------
+#}
+
+{% if field.type == 'textarea' %}
+
+    {% include "@Admin/components/textarea.twig" with {
+	label: field.label,
+	name: inputName,
+	value: value,
+	hint: field.hint ?? ''
+    } %}
+
+{% endif %}
+
+{#
+--------------------------------------------
+Textarea_line
+--------------------------------------------
+#}
+
+{% if field.type == 'textarea_line' %}
+
+    {% include "@Admin/components/textarea.twig" with {
+	label: field.label,
+	name: inputName,
+	value: value,
+	hint: field.hint ?? ''
+    } %}
+
+{% endif %}
+
+{#
+--------------------------------------------
+Select
+--------------------------------------------
+#}
+
+{% if field.type == 'select' %}
+
+    {% if field.options == 'themes' %}
+        {% set options = themes %}
+    {% else %}
+        {% set options = field.options %}
+    {% endif %}
+
+    {% include "@Admin/components/select.twig" with {
+        label: field.label,
+        name: inputName,
+        value: value,
+        hint: field.hint ?? '',
+        options: options
+    } %}
+
+{% endif %}
+
+
+{#
+--------------------------------------------
+Checkbox
+--------------------------------------------
+#}
+
+{% if field.type == 'checkbox' %}
+
+    {% include "@Admin/components/checkbox.twig" with {
+	label: field.label,
+	name: inputName,
+	value: value,
+	hint: field.hint ?? ''
+    } %}
+
+{% endif %}
+
+
+{#
+--------------------------------------------
+Repeater
+--------------------------------------------
+#}
+
+{% if field.type == 'repeater' %}
+
+    {% include "@Admin/components/schema-form-repeater.twig" with {
+        inputName: inputName,
+        value: value,
+        field: field
+    } %}
+
+{% endif %}
+

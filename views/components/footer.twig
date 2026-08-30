@@ -1,0 +1,41 @@
+<footer class="absolute bottom-2  px-4 text-white/80 text-xs flex items-center justify-between">
+
+    {# LEFT: version + env #}
+    <div class="flex items-center gap-2">
+        <span>{{ framework_name }} v{{ framework_version }}</span>
+
+        {% if app_env == 'local' %}
+            <span class="px-2 py-0.5 rounded bg-yellow-400 text-black font-semibold">
+                DEV
+            </span>
+        {% else %}
+            <span class="px-2 py-0.5 rounded bg-green-500 text-white font-semibold">
+                PRO
+            </span>
+        {% endif %}
+    </div>
+
+    {# RIGHT: footer navigation #}
+    <div class="flex items-center gap-3">
+
+        {% set items = hook('admin.navigation.footer', []) %}
+        {% if items is not iterable %}
+            {% set items = [] %}
+        {% endif %}
+
+        {% for item in items %}
+            <a href="{{ item.url|default('#') }}"
+               class="hover:underline flex items-center gap-1">
+
+                {% if item.icon %}
+                    {{ icon(item.icon, 'w-3 h-3')|raw }}
+                {% endif %}
+
+                {{ item.title|default('Item') }}
+            </a>
+        {% endfor %}
+
+    </div>
+
+</footer>
+

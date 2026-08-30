@@ -1,0 +1,14 @@
+{
+    "name": "rnd-innovations/devy-module-admin",
+    "description": "Admin module for the DeVy framework.",
+    "type": "devy-module",
+    "require": {
+        "php": "^8.3",
+        "rnd-innovations/devy-core": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "DeVy\\Modules\\Admin\\": "src/"
+        }
+    }
+}

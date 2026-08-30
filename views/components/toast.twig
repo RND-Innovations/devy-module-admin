@@ -1,0 +1,24 @@
+{# Toast Container #}
+<div id="toast-container">
+
+    {% for t in toasts %}
+        <div class="toast {{ t.type }}">
+            
+            <div class="icon">
+                {% if t.type == 'success' %}✓
+                {% elseif t.type == 'error' %}✕
+                {% elseif t.type == 'warning' %}! 
+                {% else %}i
+                {% endif %}
+            </div>
+
+            <div class="content">
+                {{ t.message }}
+            </div>
+
+            <div class="progress"></div>
+
+        </div>
+    {% endfor %}
+
+</div>

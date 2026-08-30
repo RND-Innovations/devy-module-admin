@@ -1,0 +1,17 @@
+{% set bottom = hook('admin.dashboard.bottom', []) %}
+{% if bottom is not iterable %}
+    {% set bottom = [] %}
+{% endif %}
+
+{% if bottom is not empty %}
+
+    <div class="mt-6 space-y-6">
+
+        {% for block in bottom %}
+            {{ block|raw }}
+        {% endfor %}
+
+    </div>
+
+{% endif %}
+
