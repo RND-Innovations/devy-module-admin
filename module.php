@@ -14,7 +14,7 @@ return [
     'meta' => [
         'name' => 'Admin Panel',
         'description' => 'Handling Admin Panel UI and wireframe.',        
-        'version' => '1.2.1',
+        'version' => '1.1.0',
         'author' => 'RND Innovations',
         'website' => 'https://rndvn.com',
         'license' => 'MIT',
