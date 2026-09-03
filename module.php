@@ -14,7 +14,7 @@ return [
     'meta' => [
         'name' => 'Admin Panel',
         'description' => 'Handling Admin Panel UI and wireframe.',        
-        'version' => '1.1.0',
+        'version' => '1.1.1',
         'author' => 'RND Innovations',
         'website' => 'https://rndvn.com',
         'license' => 'MIT',
@@ -37,6 +37,24 @@ return [
     'register' => function (ModuleContext $ctx) {
 
         $ctx->controller(AdminController::class);
+
+        /*
+        |--------------------------------------------------------------------------
+        | Permissions
+        |--------------------------------------------------------------------------
+        */
+
+        $ctx->permission()->addRoles([
+            'admin' => 'Admin',
+        ]);
+
+        $ctx->permission()->addPermission(
+            key: 'admin.dashboard.view',
+            name: 'View Admin Dashboard',
+            module: 'admin',
+            description: 'Access the admin dashboard.',
+            roles: [],
+        );
 
     },
 
@@ -113,7 +131,7 @@ return [
             'admin',
             'dee',
             1,
-            'admin.view'
+            'admin.dashboard.view'
         );
 
     }
