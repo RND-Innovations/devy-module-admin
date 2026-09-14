@@ -56,14 +56,14 @@
 
                         {% if field.type == 'notice' %}
 
-                            {% include "@Admin/components/schema-form-notice.twig" with {
+                            {% include "@Admin/components/schema-form/notice.twig" with {
                                 field: field
                             } %}
 
 
                         {% elseif field.type == 'separator' %}
 
-                            {% include "@Admin/components/schema-form-header.twig" with {
+                            {% include "@Admin/components/schema-form/header.twig" with {
                                 field: field
                             } %}
 
@@ -72,7 +72,7 @@
 
                             <div class="ml-4">
 
-                                {% include "@Admin/components/schema-form-fields.twig" with {
+                                {% include "@Admin/components/schema-form/fields.twig" with {
                                     inputName: inputName,
                                     value: value,
                                     field: field
@@ -93,3 +93,5 @@
     {% endfor %}
 
 </div>
+
+

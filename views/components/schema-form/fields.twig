@@ -6,7 +6,7 @@ Text
 
 {% if field.type == 'text' %}
 
-    {% include "@Admin/components/input.twig" with {
+    {% include "@Admin/components/form-fields/field-input.twig" with {
         label: field.label,
         name: inputName,
         value: value,
@@ -23,7 +23,7 @@ Number
 
 {% if field.type == 'number' %}
 
-    {% include "@Admin/components/input.twig" with {
+    {% include "@Admin/components/form-fields/field-input.twig" with {
         type: 'number',
         label: field.label,
         name: inputName,
@@ -41,7 +41,7 @@ Password
 
 {% if field.type == 'password' %}
 
-    {% include "@Admin/components/password.twig" with {
+    {% include "@Admin/components/form-fields/field-password.twig" with {
 	label: field.label,
 	name: inputName,
 	value: value,
@@ -59,12 +59,29 @@ Color
 
 {% if field.type == 'color' %}
 
-    {% include "@Admin/components/input.twig" with {
+    {% include "@Admin/components/form-fields/field-input.twig" with {
 	type: 'color',
 	label: field.label,
 	name: inputName,
 	value: value,
 	hint: field.hint ?? ''
+    } %}
+
+{% endif %}
+
+{#
+--------------------------------------------
+Image
+--------------------------------------------
+#}
+
+{% if field.type == 'image' %}
+
+    {% include "@Admin/components/form-fields/field-image.twig" with {
+        label: field.label,
+        name: inputName,
+        value: value,
+        hint: field.hint ?? ''
     } %}
 
 {% endif %}
@@ -77,7 +94,7 @@ Textarea
 
 {% if field.type == 'textarea' %}
 
-    {% include "@Admin/components/textarea.twig" with {
+    {% include "@Admin/components/form-fields/field-textarea.twig" with {
 	label: field.label,
 	name: inputName,
 	value: value,
@@ -94,7 +111,7 @@ Textarea_line
 
 {% if field.type == 'textarea_line' %}
 
-    {% include "@Admin/components/textarea.twig" with {
+    {% include "@Admin/components/form-fields/field-textarea.twig" with {
 	label: field.label,
 	name: inputName,
 	value: value,
@@ -117,7 +134,7 @@ Select
         {% set options = field.options %}
     {% endif %}
 
-    {% include "@Admin/components/select.twig" with {
+    {% include "@Admin/components/form-fields/field-select.twig" with {
         label: field.label,
         name: inputName,
         value: value,
@@ -136,7 +153,7 @@ Checkbox
 
 {% if field.type == 'checkbox' %}
 
-    {% include "@Admin/components/checkbox.twig" with {
+    {% include "@Admin/components/form-fields/field-checkbox.twig" with {
 	label: field.label,
 	name: inputName,
 	value: value,
@@ -154,7 +171,7 @@ Repeater
 
 {% if field.type == 'repeater' %}
 
-    {% include "@Admin/components/schema-form-repeater.twig" with {
+    {% include "@Admin/components/schema-form/field-repeater.twig" with {
         inputName: inputName,
         value: value,
         field: field

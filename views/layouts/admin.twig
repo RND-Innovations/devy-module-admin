@@ -18,10 +18,22 @@
         {% include "@Admin/components/header.twig" %}
 
         <main class="flex-1 overflow-y-auto p-4 md:p-6">
-            {% block content %}{% endblock %}
+        
+		{{ hook_render('admin.global.header', {
+			page: page,
+			routes: routes
+		}) }}                     
+        
+		{% block content %}{% endblock %}
+            
+		{{ hook_render('admin.global.footer', {
+			page: page,
+			routes: routes
+		}) }}             
+            
         </main>
-
     </div>
+    
     {% include "@Admin/components/toast.twig" %}
     {% include "@Admin/components/script.twig" %}
 </body>

@@ -99,7 +99,7 @@
 				    item[childKey] ?? child.default ?? ''
 				%}
 
-				{% include "@Admin/components/schema-form-fields.twig" with {
+				{% include "@Admin/components/schema-form/fields.twig" with {
 				    inputName: childName,
 				    value: childValue,
 				    field: child
@@ -202,7 +202,7 @@
 		                ~ '[' ~ childKey ~ ']'
 		            %}
 
-		            {% include "@Admin/components/schema-form-fields.twig" with {
+		            {% include "@Admin/components/schema-form/fields.twig" with {
 		                inputName: childName,
 		                value: child.default ?? '',
 		                field: child

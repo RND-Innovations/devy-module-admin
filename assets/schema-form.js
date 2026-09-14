@@ -1,3 +1,23 @@
+let ACTIVE_MEDIA_INPUT = null;
+
+document.addEventListener('click', function (event) {
+    const button = event.target.closest('.devy-media-select');
+    if (!button) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    // 🔥 Target the parent wrapper instead of generic 'div'
+    const wrapper = button.closest('.devy-media-wrapper');
+    if (!wrapper) return;
+
+    const input = wrapper.querySelector('.devy-media-input');
+    if (!input) return;
+
+    ACTIVE_MEDIA_INPUT = input;
+    toggleMediaPanel();
+});
+
 document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('[data-schema-repeater]').forEach(repeater => {
@@ -111,3 +131,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
+
+

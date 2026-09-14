@@ -14,7 +14,7 @@ return [
     'meta' => [
         'name' => 'Admin Panel',
         'description' => 'Handling Admin Panel UI and wireframe.',        
-        'version' => '1.0.3',
+        'version' => '1.0.4',
         'author' => 'RND Innovations',
         'website' => 'https://rndvn.com',
         'license' => 'MIT',
@@ -97,10 +97,10 @@ return [
             'admin.global',
             [
                 'css' => [
-                    '/Modules/Admin/assets/toast.css'
+                    '/Modules/Admin/assets/admin-global.css'
                 ],
                 'js' => [
-                    '/Modules/Admin/assets/toast.js'
+                    '/Modules/Admin/assets/admin-global.js'
                 ]
             ]
         );
