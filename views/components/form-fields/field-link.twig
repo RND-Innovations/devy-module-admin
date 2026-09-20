@@ -1,0 +1,80 @@
+<div class="space-y-1.5">
+
+    {% if label %}
+        <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">
+            {{ label }}
+        </label>
+    {% endif %}
+
+    <div class="devy-link-wrapper flex items-center gap-3 p-1.5 bg-gray-50/50 border border-gray-200 rounded-xl shadow-2xs focus-within:ring-2 focus-within:ring-indigo-500/20 focus-within:border-indigo-500 transition">
+
+        <!-- Link Preview -->
+        <div class="devy-link-preview w-11 h-11 border border-gray-200 rounded-lg overflow-hidden bg-white flex items-center justify-center text-gray-400 shrink-0 shadow-inner">
+
+            {% if value|default('') != '' %}
+
+                <svg
+                    class="w-5 h-5 text-indigo-500"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                >
+                    <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
+                    <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
+                </svg>
+
+            {% else %}
+
+                <svg
+                    class="w-5 h-5 text-gray-300"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                >
+                    <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
+                    <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
+                </svg>
+
+            {% endif %}
+
+        </div>
+
+        <div class="flex-1 min-w-0">
+
+            {% if prefix %}
+                <span class="text-gray-400 text-xs mr-1">
+                    {{ prefix }}
+                </span>
+            {% endif %}
+
+            <input
+                name="{{ name }}"
+                value="{{ value|default('') }}"
+                type="text"
+                placeholder="{{ placeholder|default('No link selected...') }}"
+                class="devy-link-input w-full bg-transparent text-xs text-gray-800 placeholder-gray-400 outline-none truncate"
+                readonly
+            >
+
+        </div>
+
+        <!-- Browse -->
+        <div
+            role="button"
+            tabindex="0"
+            class="devy-link-select inline-flex items-center justify-center px-3.5 py-2 text-xs font-medium rounded-lg bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white shadow-xs transition shrink-0 cursor-pointer select-none"
+        >
+            Browse
+        </div>
+
+    </div>
+
+    {% if hint %}
+        <p class="text-[11px] text-gray-400 ml-0.5">
+            {{ hint }}
+        </p>
+    {% endif %}
+
+</div>

@@ -1,0 +1,101 @@
+<div>
+
+    {% if label %}
+        <label class="block text-sm font-medium text-gray-700 mb-1">
+            {{ label }}
+        </label>
+    {% endif %}
+
+    <div x-data="{
+        content: '{{ value|default('')|e('js') }}',
+        
+        exec(command, value = null) {
+            document.execCommand(command, false, value);
+            this.sync();
+        },
+
+        insertTable() {
+            const tableHtml = `
+                <table style='width:100%; border-collapse:collapse; margin:1rem 0;'>
+                    <thead>
+                        <tr>
+                            <th style='border:1px solid #cbd5e1; padding:8px; background:#f8fafc;'>Header 1</th>
+                            <th style='border:1px solid #cbd5e1; padding:8px; background:#f8fafc;'>Header 2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style='border:1px solid #cbd5e1; padding:8px;'>Data 1</td>
+                            <td style='border:1px solid #cbd5e1; padding:8px;'>Data 2</td>
+                        </tr>
+                    </tbody>
+                </table><p></p>`;
+            document.execCommand('insertHTML', false, tableHtml);
+            this.sync();
+        },
+
+        clearAll() {
+            $refs.editor.innerHTML = '';
+            this.sync();
+        },
+
+        sync() {
+            this.content = $refs.editor.innerHTML;
+        }
+    }" 
+    x-init="$refs.editor.innerHTML = content"
+    class="w-full border rounded-lg overflow-hidden bg-white shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:border-indigo-500 {{ class|default('') }}">
+
+        <!-- Toolbar -->
+        <div class="flex flex-wrap items-center gap-1 p-2 bg-slate-50 border-b border-slate-200 text-slate-700">
+            <button type="button" @click="exec('bold')" class="p-1.5 px-2.5 text-xs font-bold rounded hover:bg-slate-200 border border-slate-300 bg-white" title="Bold">
+                B
+            </button>
+
+            <button type="button" @click="exec('italic')" class="p-1.5 px-2.5 text-xs italic rounded hover:bg-slate-200 border border-slate-300 bg-white" title="Italic">
+                I
+            </button>
+
+            <div class="h-4 w-px bg-slate-300 mx-1"></div>
+
+            <button type="button" @click="exec('insertUnorderedList')" class="p-1.5 px-2.5 text-xs rounded hover:bg-slate-200 border border-slate-300 bg-white" title="Bullet List">
+                • Bullet List
+            </button>
+
+            <button type="button" @click="exec('insertOrderedList')" class="p-1.5 px-2.5 text-xs rounded hover:bg-slate-200 border border-slate-300 bg-white" title="Numbered List">
+                1. Numbered List
+            </button>
+
+            <div class="h-4 w-px bg-slate-300 mx-1"></div>
+
+            <button type="button" @click="insertTable()" class="p-1.5 px-2.5 text-xs rounded hover:bg-slate-200 border border-slate-300 bg-white flex items-center gap-1" title="Insert Table">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18M3 6h18M3 18h18M10 3v18M14 3v18"/></svg>
+                Table
+            </button>
+
+            <button type="button" @click="clearAll()" class="p-1.5 px-2.5 text-xs text-rose-600 rounded hover:bg-rose-50 border border-slate-300 bg-white ml-auto" title="Clear Content">
+                Clear
+            </button>
+        </div>
+
+        <!-- Editable Rich Text Box -->
+        <div 
+            x-ref="editor"
+            contenteditable="true"
+            @input="sync()"
+            @blur="sync()"
+            @keyup="sync()"
+            class="p-3 min-h-[160px] focus:outline-none prose max-w-none text-slate-800"
+        ></div>
+
+        <!-- Hidden input replaces standard textarea for form POST -->
+        <input type="hidden" name="{{ name }}" :value="content">
+    </div>
+
+    {% if hint %}
+        <p class="text-xs text-gray-400 mt-1">
+            {{ hint }}
+        </p>
+    {% endif %}
+
+</div>

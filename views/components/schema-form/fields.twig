@@ -86,6 +86,25 @@ Image
 
 {% endif %}
 
+
+{#
+--------------------------------------------
+Link
+--------------------------------------------
+#}
+
+{% if field.type == 'link' %}
+
+    {% include "@Admin/components/form-fields/field-link.twig" with {
+        label: field.label,
+        name: inputName,
+        value: value,
+        hint: field.hint ?? ''
+    } %}
+
+{% endif %}
+
+
 {#
 --------------------------------------------
 Textarea
@@ -112,6 +131,23 @@ Textarea_line
 {% if field.type == 'textarea_line' %}
 
     {% include "@Admin/components/form-fields/field-textarea.twig" with {
+	label: field.label,
+	name: inputName,
+	value: value,
+	hint: field.hint ?? ''
+    } %}
+
+{% endif %}
+
+{#
+--------------------------------------------
+WYSIWYG
+--------------------------------------------
+#}
+
+{% if field.type == 'wysiwyg' %}
+
+    {% include "@Admin/components/form-fields/field-wysiwyg.twig" with {
 	label: field.label,
 	name: inputName,
 	value: value,
